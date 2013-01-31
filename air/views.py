@@ -20,4 +20,6 @@ def rideControl(request):
 
     getattr(s, switch)()
 
-    return Response('ok')
+    response = Response('ok')
+    response['Cache-Control'] = 'no-cache'
+    return response 
