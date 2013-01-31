@@ -37,7 +37,7 @@ app.initialize();
 
         var racer = false;
 
-        $('.switch').click(function(e) {
+        $('.switch').live('click', function(e) {
             e.preventDefault();
 
             if (racer) return;
