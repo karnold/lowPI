@@ -34,6 +34,7 @@ app.initialize();
 
 (function($) {
     $(document).ready(function() {
+
         var racer = false;
 
         $('.switch').click(function(e) {
@@ -45,6 +46,8 @@ app.initialize();
 
             $.ajax({
                 url: 'http://192.168.1.108',
+                cache: false,
+                crossDomain: true,
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -52,11 +55,9 @@ app.initialize();
                 },  
                 success: function(data) {
                     racer = false;
-                    console.log('success');
                 },  
                 error: function(e) {
                     racer = false;
-                    console.log('error');
                 }   
             }); 
         }); 
