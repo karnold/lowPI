@@ -18,7 +18,8 @@ class suspension:
     REAR_RIGHT_DOWN     = 11
 
     # Duration in seconds before shutting off servos
-    DIAG_TIME = 1
+    DIAG_TIME = 0.5
+    INTERVAL = 1
 
     def __init__(self):
         print("initialized")
@@ -45,64 +46,90 @@ class suspension:
         GPIO.output(self.REAR_RIGHT_UP, False)
         GPIO.output(self.REAR_RIGHT_DOWN, False)
     
-    def allPinsDownTimed(self):
-        time.sleep(DIAG_TIME)
+    def engageServos(self, servos):
+        self.allPinsDown()
+        for servo in servos:
+            GPIO.output(servo, True)
 
+        time.sleep(self.INTERVAL) 
+        self.allPinsDown()
     def frontLeftUp(self):
-        GPIO.output(self.FRONT_LEFT_UP, True)
-        GPIO.output(self.FRONT_LEFT_DOWN, False)
+        servos = [self.FRONT_LEFT_UP]
+        self.engageServos(servos)
 
     def frontLeftDown(self):
-        GPIO.output(self.FRONT_LEFT_UP, False)
-        GPIO.output(self.FRONT_LEFT_DOWN, True)
+        servos = [self.FRONT_LEFT_DOWN]
+        self.engageServos(servos)
 
     def frontRightUp(self):
-        GPIO.output(self.FRONT_LEFT_DOWN, False)
-        GPIO.output(self.FRONT_RIGHT_UP, True)
+        servos = [self.FRONT_RIGHT_UP];
+        self.engageServos(servos)
 
     def frontRightDown(self):
-        GPIO.output(self.FRONT_RIGHT_UP, False)
-        GPIO.output(self.FRONT_RIGHT_DOWN, True)
+        servos = [self.FRONT_RIGHT_DOWN]
+        self.engageServos(servos)
 
     def rearLeftUp(self):
-        GPIO.output(self.FRONT_RIGHT_DOWN, False)
-        GPIO.output(self.REAR_LEFT_UP, True)
+        servos = [self.REAR_LEFT_UP]
+        self.engageServos(servos)
 
     def rearLeftDown(self):
-        GPIO.output(self.REAR_LEFT_UP, False)
-        GPIO.output(self.REAR_LEFT_DOWN, True)
+        servos = [self.REAR_LEFT_DOWN]
+        self.engageServos(servos)
 
     def rearRightUp(self):
-        GPIO.output(self.REAR_LEFT_DOWN, False)
-        GPIO.output(self.REAR_RIGHT_UP, True)
+        servos = [self.REAR_RIGHT_UP]
+        self.engageServos(servos)
 
     def rearRightDown(self):
-        GPIO.output(self.REAR_RIGHT_UP, False)
-        GPIO.output(self.REAR_RIGHT_DOWN, True)
+        servos = [self.REAR_RIGHT_DOWN]
+        self.engageServos(servos)
 
     def allUp(self):
-        self.frontUp()
-        self.rearUp()
+        servos = [
+            self.FRONT_LEFT_UP,
+            self.FRONT_RIGHT_UP,
+            self.REAR_LEFT_UP,
+            self.REAR_RIGHT_UP
+        ]
+        self.engageServos(servos)
 
     def allDown(self):
-        self.frontDown()
-        self.rearDown()
+        servos = [
+            self.FRONT_LEFT_DOWN,
+            self.FRONT_RIGHT_DOWN,
+            self.REAR_LEFT_DOWN,
+            self.REAR_RIGHT_DOWN
+        ]
+        self.engageServos(servos)
 
     def frontUp(self):
-        self.frontLeftUp()
-        self.frontRightUp()
+        servos = [
+            self.FRONT_LEFT_UP,
+            self.FRONT_RIGHT_UP
+        ]
+        self.engageServos(servos)
 
     def frontDown(self):
-        self.frontLeftDown()
-        self.frontRightDown()
+        servos = [
+            self.FRONT_LEFT_DOWN,
+            self.FRONT_RIGHT_DOWN
+        ]
+        self.engageServos(servos)
 
     def rearUp(self):
-        self.rearLeftUp()
-        self.rearRightUp()
+        servos = [
+            self.REAR_LEFT_UP,
+            self.REAR_RIGHT_UP
+        ]
+        self.engageServos(servos)
 
     def rearDown(self):
-        self.rearLeftDown()
-        self.rearRightDown()
+        servos = [
+            self.REAR_LEFT_DOWN,
+            self.REAR_RIGHT_DOWN
+        ]
+        self.engageServos(servos)
 
     def diagnostic(self):
         while (True):
