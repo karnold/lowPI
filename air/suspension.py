@@ -22,7 +22,6 @@ class suspension:
     INTERVAL = 1
 
     def __init__(self):
-        print("initialized")
 
         # Initialize GPIO pins
         GPIO.setup(self.FRONT_LEFT_UP, GPIO.OUT)

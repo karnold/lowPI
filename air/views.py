@@ -5,18 +5,12 @@ from rest_framework.parsers import JSONParser
 from air import suspension
 import time
 
-import pprint
-
 @api_view(['POST'])
 
 def rideControl(request):
     s = suspension.suspension()
 
-    #data = JSONParser().parse(request)
-
     switch = request.DATA.get('switch')
-
-    print(switch)
 
     getattr(s, switch)()
 
