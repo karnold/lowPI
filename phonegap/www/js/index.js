@@ -45,7 +45,7 @@ app.initialize();
             racer = true;
 
             $.ajax({
-                url: 'http://192.168.1.108',
+                url: 'http://192.168.0.1',
                 cache: false,
                 crossDomain: true,
                 type: 'POST',
